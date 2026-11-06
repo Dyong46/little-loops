@@ -14,9 +14,9 @@ The homepage is a Server Component. The category and featured-product sections f
 
 Add the public variables listed in `shop.env.example` to your local or deployment environment. Do not overwrite an existing `.env` file. Set actual Zalo, Messenger, and Instagram URLs to enable those destinations; unset channels display an honest coming-soon state. A message can be copied from the enquiry dialog before opening a channel. Nothing is automatically sent.
 
-Set `NEXT_PUBLIC_SITE_URL` to the absolute production origin for correct Open Graph URLs and search indexing. Indexing remains disabled until that value is configured. Rebuild after changing public variables.
+Set `NEXT_PUBLIC_SITE_URL` to the absolute production origin for canonical and social URLs. Vercel’s `VERCEL_PROJECT_PRODUCTION_URL` is used as a fallback when present. Indexing is disabled without either value. Rebuild after changing public variables.
 
-Catalog content is centralized in `lib/shop.ts`. The Little Loops identity, products, prices, testimonials, and AI-generated imagery are illustrative; replace these with the shop's approved content before launch. The Instagram section is a static inspiration gallery, with no embedded feed or tracking scripts.
+Catalog IDs, images, and numeric prices are centralized in `lib/shop.ts`; localized names and descriptions live in `messages/en.json` and `messages/vi.json`. The Little Loops identity, products, prices, testimonials, and AI-generated imagery are illustrative; replace these with the shop's approved content before launch. The Instagram section is a static inspiration gallery, with no embedded feed or tracking scripts.
 
 ## Design system and assets
 
@@ -65,3 +65,28 @@ There are no infinite loops, scroll listeners, layout-property animations, hidde
 The category and featured-product headings/grids now remain static when scrolling, avoiding a late fade-up after their images are already visible. Other section entrances remain intact. The mobile menu uses a native button; contact actions use the Base UI dialog trigger directly rather than a composed second Button. Menu and floating-chat touch targets use `touch-action: manipulation` and remain stationary on coarse pointers. Floating-chat entrance is limited to fine pointers. The header has an explicit stacking layer above animated content and below dialog overlays. Actual iPhone Safari verification is still pending.
 
 Category tiles and filter controls use local React state and `aria-pressed` buttons. Only category tiles explicitly scroll down to the collection; in-section filters keep the current position. Category changes do not update the URL or fetch another Server Component payload. The obsolete routing-link helper was removed.
+
+## English and Vietnamese
+
+Uses the already-installed `next-intl` dependency. Existing root-level `app/` conventions are retained rather than introducing a separate `src/` tree:
+
+```text
+app/[locale]/layout.tsx       Locale validation, html lang, providers, static locales
+app/[locale]/page.tsx         Server-rendered copy and localized metadata
+app/[locale]/not-found.tsx    Localized 404
+app/[locale]/[...rest]/page.tsx  Unmatched-page 404 boundary
+proxy.ts                     Locale negotiation and redirects (Next.js 16)
+i18n/routing.ts              Supported locales en/vi, default en, always prefixed
+i18n/request.ts              Per-request message loading
+i18n/navigation.ts           Locale-aware navigation helpers
+messages/en.json
+messages/vi.json
+```
+
+`/en` and `/vi` are statically generated. `/` negotiates the locale using next-intl’s locale cookie and browser language, falling back to English. Assets, API paths, and Vercel internals are excluded from locale rewriting. Unsupported paths return 404.
+
+The header language selector uses locale-aware navigation to keep the current pathname, query string, and fragment with `scroll: false`; it does not send users back to the homepage. Future localized routes can use the same helper. Filter selection remains local React state and never becomes a URL parameter.
+
+Homepage copy is translated on the server using `getTranslations`. Only the Catalog, Contact, Navigation, Language, and NotFound namespaces are passed to Client Components. Product names/descriptions, currency formatting, enquiry messages, dialog close labels, accessible names, and image alternatives are localized as well. Brand and social-platform names are intentionally unchanged.
+
+Each locale has a translated title/description and social metadata, its own canonical URL, reciprocal en/vi hreflang links, and an English x-default. The root html language matches the URL. No extra product route was introduced from the illustrative directory example.

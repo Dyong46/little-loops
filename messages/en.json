@@ -1,0 +1,204 @@
+{
+  "Home": {
+    "brandCaption": "HANDMADE WITH HEART",
+    "skip": "Skip to content",
+    "announcement": "Small stitches. Thoughtful gifts. A little everyday joy.",
+    "hello": "Say hello",
+    "heroEyebrow": "A LITTLE YARN. A LOT OF LOVE.",
+    "heroStart": "Little things,",
+    "heroMiddle": "made with",
+    "heroEnd": "big love.",
+    "heroDescription1": "Soft stitches, sweet details, and a little bit of magic.",
+    "heroDescription2": "Handmade crochet treasures to keep close",
+    "heroDescription3": "or gift to someone special.",
+    "explore": "Explore the collection",
+    "personal": "Something just for you",
+    "heroFootnote": "Made slowly. Loved for a long time.",
+    "sealTop": "one of a kind",
+    "sealMiddle": "just like you",
+    "sealBottom": "HANDMADE WITH LOVE",
+    "heroNote": "a hug, in handmade form",
+    "value1": "Made by hand, with heart",
+    "value2": "Soft yarn, thoughtful details",
+    "value3": "A little different. All yours.",
+    "value4": "Ready to make someone smile",
+    "storyCaption": "A slower kind of lovely.",
+    "storyEyebrow": "HELLO FROM OUR LITTLE CORNER",
+    "storyLine1": "A little yarn.",
+    "storyLine2": "A little patience.",
+    "storyLine3": "A whole lot of heart.",
+    "storyParagraph1": "There’s something special about a thing made by hand. The tiny details. The personality in every stitch. The feeling that it was made just for you.",
+    "storyParagraph2": "That’s the heart of Little Loops. A small crochet shop making soft companions, forever flowers, and everyday keepsakes — one thoughtful stitch at a time.",
+    "storyCta": "Let’s create something meaningful",
+    "signature": "with love, Little Loops",
+    "customEyebrow": "YOUR IDEA. OUR HAPPY LITTLE HANDS.",
+    "customStart": "Dream it. We’ll",
+    "customEnd": "stitch it.",
+    "customDescription": "A favorite color, a tiny lookalike, a gift with their name on it. Let’s turn your little idea into something wonderfully personal.",
+    "customNote": "A conversation first. A keepsake to follow.",
+    "stickerStart": "made for",
+    "stickerEnd": "only you.",
+    "reviewsEyebrow": "LITTLE NOTES, WARM HEARTS",
+    "reviewsTitle": "The sweetest part? Your smiles.",
+    "reviewsNote": "Sample notes to preview this space. Real customer stories coming soon.",
+    "sampleStory": "· sample story",
+    "instagramEyebrow": "A PEEK BEHIND THE STITCHES",
+    "instagramTitle": "Our little everyday.",
+    "instagramCta": "Find us on Instagram",
+    "instagramNote": "A little inspiration board of our sample creations.",
+    "closingTitle": "Something lovely starts with hello.",
+    "closingDescription": "Found a favorite? Have a little idea? We’d love to hear it.",
+    "footerLine1": "Little handmade treasures.",
+    "footerLine2": "For your favorite people, and you.",
+    "footerExplore": "Wander a little",
+    "navCollection": "The collection",
+    "navStory": "Our little story",
+    "footerCustom": "Custom creations",
+    "footerSocial": "Let’s be friends",
+    "comingSoon": "· coming soon",
+    "footerNote1": "Every loop has a little love in it.",
+    "footerNote2": "Thank you for being here.",
+    "backTop": "Back to the lovely things",
+    "copyright": "Little Loops. Made with heart.",
+    "preview": "Concept storefront · sample content",
+    "navCustom": "Made for you",
+    "logoAlt": "Little Loops home",
+    "navLabel": "Main navigation",
+    "heroAlt": "Cream crochet bunny in a rose scarf, with soft yarn and handmade tulips on warm linen",
+    "sealAlt": "One of a kind, always handmade",
+    "storyAlt": "Handcrafted crochet bunny and yarn, showing the detail in every stitch",
+    "customCta": "Let’s make it yours",
+    "customSubject": "a custom crochet order",
+    "customAlt": "Pink and ivory crochet tulips for a personalized handmade bouquet",
+    "reviewQuote1": "Even sweeter in person. The little details make it feel so special — my new favorite desk companion.",
+    "reviewName1": "A little desk-side joy",
+    "reviewItem1": "Crochet plushie",
+    "reviewQuote2": "A bouquet that I can keep forever. Such a thoughtful way to say a little thank you.",
+    "reviewName2": "Flowers, with a little forever",
+    "reviewItem2": "Crochet flowers",
+    "reviewQuote3": "From the colors to the tiny finishing touches, it feels like a gift made just for me.",
+    "reviewName3": "Something wonderfully personal",
+    "reviewItem3": "Custom keepsake",
+    "reviewRating": "Illustrative five-star rating",
+    "followCta": "Follow our little journey",
+    "galleryAlt1": "Soft pink handmade tulips",
+    "galleryAlt2": "A crochet bunny waiting for a hug",
+    "galleryAlt3": "A cream crochet bag for everyday adventures",
+    "galleryAlt4": "A tiny bear keychain",
+    "galleryAlt5": "Crochet blooms in soft spring colors",
+    "closingCta": "Come say hello"
+  },
+  "Navigation": {
+    "open": "Open navigation",
+    "close": "Close navigation",
+    "label": "Mobile navigation"
+  },
+  "Language": {
+    "label": "Choose language",
+    "changing": "Changing language…"
+  },
+  "NotFound": {
+    "title": "This little corner is missing.",
+    "description": "Let’s head back to the shop.",
+    "back": "Back to the shop"
+  },
+  "Metadata": {
+    "title": "Little Loops | Handmade Crochet, Thoughtful Gifts",
+    "description": "Discover handmade crochet plushies, flowers, bags, keychains, and personalized gifts. Thoughtfully stitched, made with heart.",
+    "imageAlt": "Handmade crochet bunny and tulips",
+    "socialTitle": "Little Loops — Little things, made with big love."
+  },
+  "Catalog": {
+    "eyebrow": "FIND YOUR LITTLE JOY",
+    "title": "A lovely little world of crochet.",
+    "description": "For the cuddles, the everyday, and the just-because moments.",
+    "collectionEyebrow": "FROM OUR HANDS TO YOUR HEART",
+    "collectionTitle": "Meet your new favorites.",
+    "viewAll": "View all favorites",
+    "gift": "Find a personal gift",
+    "filter": "Filter collection",
+    "all": "All the lovely things",
+    "sample": "A peek at what’s possible — illustrative products, imagery, and prices. Each piece is made to order.",
+    "alt": "Handmade crochet {category}",
+    "favoriteTag": "Much-loved little one",
+    "flowerTag": "Forever in bloom",
+    "handmadeTag": "Handmade with love",
+    "quote": "Quoted for you",
+    "categories": {
+      "plushies": {
+        "name": "Cuddly friends",
+        "subtitle": "Plushies"
+      },
+      "flowers": {
+        "name": "Forever flowers",
+        "subtitle": "Flowers"
+      },
+      "bags": {
+        "name": "Everyday lovely",
+        "subtitle": "Bags"
+      },
+      "keychains": {
+        "name": "Little companions",
+        "subtitle": "Keychains"
+      },
+      "gifts": {
+        "name": "Just for you",
+        "subtitle": "Personalized gifts"
+      }
+    },
+    "products": {
+      "bunny": {
+        "name": "Rosie the little bunny",
+        "description": "A soft little friend with floppy ears and a blush scarf. Choose a color to make Rosie your own.",
+        "note": "A little favorite"
+      },
+      "flowers": {
+        "name": "A pocketful of tulips",
+        "description": "A bouquet of crochet tulips that stays lovely. Pick your favorite shades and the number of stems.",
+        "note": "Made to make them smile"
+      },
+      "bag": {
+        "name": "Sunday market bag",
+        "description": "An easygoing crochet companion for slow mornings and everyday adventures. Ask us about colors and sizing.",
+        "note": "For your everyday"
+      },
+      "bear": {
+        "name": "Tiny bear, big heart",
+        "description": "A tiny crochet bear to carry a little joy on your keys or bag. Personalize with your favorite color.",
+        "note": "A thoughtful little gift"
+      },
+      "gift": {
+        "name": "Your own little keepsake",
+        "description": "A personalized crochet keepsake inspired by your idea. Message us to discuss the design, timing, and quote.",
+        "note": "One of a kind"
+      }
+    }
+  },
+  "Contact": {
+    "defaultLabel": "Let’s make something lovely",
+    "chat": "Let’s chat",
+    "contactLabel": "Contact Little Loops",
+    "eyebrow": "A LITTLE HELLO",
+    "title": "Lovely things start with a chat.",
+    "description": "Ask us about {subject}. Choose your favorite way to say hello.",
+    "defaultSubject": "a handmade piece, a thoughtful gift, or an idea of your own",
+    "messageSubject": "Hello Little Loops! I would love to know more about {subject}.",
+    "messageDefault": "Hello Little Loops! I have a crochet idea in mind.",
+    "starter": "Your conversation starter",
+    "copy": "Copy message",
+    "copied": "Copied",
+    "copyStatus": "Message copied to clipboard",
+    "comingSoon": "Coming soon",
+    "preview": "This is a shop preview. Contact channels will be available when the shop adds its social accounts.",
+    "productEyebrow": "HANDMADE, JUST FOR YOU",
+    "view": "View {name} and enquire",
+    "samplePrice": "· sample price",
+    "productNote": "Message us to confirm availability, colors, production time, delivery, and your final quote.",
+    "save": "Save {name}",
+    "unsave": "Unsave {name}",
+    "close": "Close",
+    "Zalo": "A little hello, a lovely new creation.",
+    "Messenger": "Tell us what you have in mind.",
+    "Instagram": "Find inspiration and say hello."
+  }
+}

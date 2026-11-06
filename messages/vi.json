@@ -1,0 +1,204 @@
+{
+  "Home": {
+    "brandCaption": "ĐAN BẰNG CẢ TRÁI TIM",
+    "skip": "Bỏ qua để đến nội dung",
+    "announcement": "Từng mũi đan nhỏ. Món quà đầy yêu thương. Niềm vui mỗi ngày.",
+    "hello": "Nhắn tiệm nhé",
+    "heroEyebrow": "CHÚT SỢI LEN. THẬT NHIỀU YÊU THƯƠNG.",
+    "heroStart": "Điều nhỏ xinh,",
+    "heroMiddle": "gửi gắm",
+    "heroEnd": "yêu thương.",
+    "heroDescription1": "Mũi đan mềm mại, chi tiết đáng yêu, thêm chút diệu kỳ.",
+    "heroDescription2": "Những món đồ len thủ công để bạn nâng niu",
+    "heroDescription3": "hay gửi tặng một người đặc biệt.",
+    "explore": "Khám phá bộ sưu tập",
+    "personal": "Một món quà dành riêng cho bạn",
+    "heroFootnote": "Chậm rãi làm nên. Yêu thương thật lâu.",
+    "sealTop": "mỗi món một nét",
+    "sealMiddle": "riêng như bạn",
+    "sealBottom": "TỈ MẨN VỚI YÊU THƯƠNG",
+    "heroNote": "một cái ôm từ những sợi len",
+    "value1": "Làm bằng tay, gửi bằng tim",
+    "value2": "Len mềm mại, chăm chút từng nét",
+    "value3": "Một chút khác biệt, dành riêng bạn.",
+    "value4": "Gửi đi một nụ cười",
+    "storyCaption": "Nét đáng yêu từ sự chậm rãi.",
+    "storyEyebrow": "LỜI CHÀO TỪ GÓC NHỎ CỦA TIỆM",
+    "storyLine1": "Một chút len.",
+    "storyLine2": "Một chút kiên nhẫn.",
+    "storyLine3": "Thật nhiều yêu thương.",
+    "storyParagraph1": "Đồ làm bằng tay luôn có nét đặc biệt. Từ những chi tiết nhỏ, dấu ấn riêng trong từng mũi đan, đến cảm giác món đồ ấy được làm dành riêng cho bạn.",
+    "storyParagraph2": "Đó là điều Little Loops luôn gìn giữ. Một tiệm len nhỏ làm nên những người bạn mềm mại, bó hoa không phai và món đồ lưu niệm mỗi ngày — bằng từng mũi đan chăm chút.",
+    "storyCta": "Cùng làm nên một món quà ý nghĩa",
+    "signature": "thương mến, Little Loops",
+    "customEyebrow": "Ý TƯỞNG CỦA BẠN. ĐÔI TAY KHÉO CỦA TIỆM.",
+    "customStart": "Bạn mơ. Tiệm",
+    "customEnd": "đan thành.",
+    "customDescription": "Một màu yêu thích, phiên bản tí hon của ai đó, hay món quà có tên người nhận. Cùng biến ý tưởng nhỏ của bạn thành điều thật riêng nhé.",
+    "customNote": "Bắt đầu bằng lời nhắn. Kết thành món quà thương.",
+    "stickerStart": "làm riêng",
+    "stickerEnd": "cho bạn.",
+    "reviewsEyebrow": "LỜI NHẮN NHỎ, ẤM LÒNG NHAU",
+    "reviewsTitle": "Niềm vui của tiệm là nụ cười của bạn.",
+    "reviewsNote": "Lời nhắn minh họa cho bản xem trước. Câu chuyện thật của khách sẽ được cập nhật sau.",
+    "sampleStory": "· câu chuyện minh họa",
+    "instagramEyebrow": "MỘT CHÚT CHUYỆN SAU TỪNG MŨI ĐAN",
+    "instagramTitle": "Mỗi ngày ở góc nhỏ.",
+    "instagramCta": "Ghé tiệm trên Instagram",
+    "instagramNote": "Góc cảm hứng nhỏ từ những sản phẩm minh họa của tiệm.",
+    "closingTitle": "Điều dễ thương bắt đầu bằng lời chào.",
+    "closingDescription": "Bạn đã tìm được món yêu thích hay có ý tưởng nhỏ? Kể tiệm nghe nhé.",
+    "footerLine1": "Những món quà thủ công nhỏ xinh.",
+    "footerLine2": "Dành tặng người bạn thương, và chính bạn.",
+    "footerExplore": "Dạo quanh tiệm",
+    "navCollection": "Bộ sưu tập",
+    "navStory": "Chuyện của tiệm",
+    "footerCustom": "Đặt làm theo ý bạn",
+    "footerSocial": "Kết nối với tiệm",
+    "comingSoon": "· sắp có",
+    "footerNote1": "Mỗi vòng len đều mang chút yêu thương.",
+    "footerNote2": "Cảm ơn bạn đã ghé chơi.",
+    "backTop": "Về lại những điều nhỏ xinh",
+    "copyright": "Little Loops. Đan bằng cả trái tim.",
+    "preview": "Cửa hàng mẫu · nội dung minh họa",
+    "navCustom": "Dành riêng bạn",
+    "logoAlt": "Trang chủ Little Loops",
+    "navLabel": "Điều hướng chính",
+    "heroAlt": "Thỏ len màu kem quàng khăn hồng, bên những cuộn len và hoa tulip thủ công trên vải lanh",
+    "sealAlt": "Mỗi món một nét riêng, luôn được làm thủ công",
+    "storyAlt": "Thỏ len thủ công và cuộn len, với chi tiết rõ nét trong từng mũi đan",
+    "customCta": "Cùng tạo món quà của bạn",
+    "customSubject": "một món đồ len theo yêu cầu",
+    "customAlt": "Hoa tulip len hồng và trắng ngà cho bó hoa thủ công đặt riêng",
+    "reviewQuote1": "Ngoài đời còn xinh hơn nữa. Những chi tiết nhỏ khiến món quà thật đặc biệt — người bạn mới đáng yêu trên bàn làm việc của mình.",
+    "reviewName1": "Niềm vui nhỏ bên bàn làm việc",
+    "reviewItem1": "Thú bông len",
+    "reviewQuote2": "Một bó hoa mình có thể giữ mãi. Thật dịu dàng và ý nghĩa để gửi lời cảm ơn.",
+    "reviewName2": "Bó hoa mang chút mãi mãi",
+    "reviewItem2": "Hoa len",
+    "reviewQuote3": "Từ màu sắc đến từng chi tiết hoàn thiện, cảm giác như món quà này được làm dành riêng cho mình.",
+    "reviewName3": "Một món quà thật riêng",
+    "reviewItem3": "Quà lưu niệm đặt riêng",
+    "reviewRating": "Đánh giá năm sao minh họa",
+    "followCta": "Theo dõi hành trình nhỏ của tiệm",
+    "galleryAlt1": "Hoa tulip thủ công hồng dịu",
+    "galleryAlt2": "Thỏ len đang đợi một cái ôm",
+    "galleryAlt3": "Túi len màu kem cho những chuyến đi mỗi ngày",
+    "galleryAlt4": "Móc khóa gấu len tí hon",
+    "galleryAlt5": "Hoa len với sắc xuân dịu nhẹ",
+    "closingCta": "Nhắn tiệm một lời chào"
+  },
+  "Navigation": {
+    "open": "Mở menu",
+    "close": "Đóng menu",
+    "label": "Điều hướng trên điện thoại"
+  },
+  "Language": {
+    "label": "Chọn ngôn ngữ",
+    "changing": "Đang đổi ngôn ngữ…"
+  },
+  "NotFound": {
+    "title": "Chưa tìm thấy góc nhỏ này.",
+    "description": "Mình quay lại tiệm nhé.",
+    "back": "Về trang chủ"
+  },
+  "Metadata": {
+    "title": "Little Loops | Đồ len thủ công, quà tặng yêu thương",
+    "description": "Khám phá thú bông len, hoa len, túi xách, móc khóa và quà tặng cá nhân hóa tại Little Loops. Tỉ mỉ trong từng mũi đan, gửi gắm thật nhiều yêu thương.",
+    "imageAlt": "Thỏ len và hoa tulip thủ công",
+    "socialTitle": "Little Loops — Điều nhỏ xinh, gửi gắm yêu thương."
+  },
+  "Catalog": {
+    "eyebrow": "TÌM NIỀM VUI NHỎ CỦA BẠN",
+    "title": "Một thế giới len nhỏ xinh.",
+    "description": "Cho những cái ôm, những ngày bình thường và cả món quà chẳng cần lý do.",
+    "collectionEyebrow": "TỪ ĐÔI TAY TIỆM, ĐẾN TRÁI TIM BẠN",
+    "collectionTitle": "Gặp những món đồ bạn sẽ thương.",
+    "viewAll": "Xem tất cả sản phẩm",
+    "gift": "Tìm món quà riêng",
+    "filter": "Lọc bộ sưu tập",
+    "all": "Tất cả món xinh",
+    "sample": "Một chút gợi ý từ tiệm — sản phẩm, hình ảnh và giá chỉ mang tính minh họa. Mỗi món đều được làm theo đơn đặt hàng.",
+    "alt": "{category} đan móc thủ công",
+    "favoriteTag": "Bạn nhỏ được yêu mến",
+    "flowerTag": "Mãi mãi khoe sắc",
+    "handmadeTag": "Làm bằng cả yêu thương",
+    "quote": "Báo giá theo yêu cầu",
+    "categories": {
+      "plushies": {
+        "name": "Những bạn nhỏ êm ái",
+        "subtitle": "Thú bông len"
+      },
+      "flowers": {
+        "name": "Hoa mãi chẳng phai",
+        "subtitle": "Hoa len"
+      },
+      "bags": {
+        "name": "Xinh xắn mỗi ngày",
+        "subtitle": "Túi len"
+      },
+      "keychains": {
+        "name": "Bạn đồng hành tí hon",
+        "subtitle": "Móc khóa"
+      },
+      "gifts": {
+        "name": "Dành riêng cho bạn",
+        "subtitle": "Quà cá nhân hóa"
+      }
+    },
+    "products": {
+      "bunny": {
+        "name": "Thỏ nhỏ Rosie",
+        "description": "Bạn nhỏ mềm mại với đôi tai dài và khăn hồng dịu. Chọn màu bạn thích để Rosie mang nét riêng của bạn.",
+        "note": "Bạn nhỏ được yêu mến"
+      },
+      "flowers": {
+        "name": "Một ôm tulip nhỏ",
+        "description": "Bó tulip len luôn tươi xinh. Bạn có thể chọn sắc hoa yêu thích và số cành mong muốn.",
+        "note": "Để người nhận mỉm cười"
+      },
+      "bag": {
+        "name": "Túi dạo chợ Chủ nhật",
+        "description": "Chiếc túi len thân thiện cho những buổi sáng thảnh thơi và chuyến đi thường ngày. Hỏi tiệm về màu sắc và kích thước nhé.",
+        "note": "Dành cho mỗi ngày của bạn"
+      },
+      "bear": {
+        "name": "Gấu tí hon, thương thật nhiều",
+        "description": "Mang theo chút niềm vui cùng móc khóa gấu len nhỏ xinh. Chọn màu yêu thích để treo lên chìa khóa hay túi nhé.",
+        "note": "Món quà nhỏ đầy ý nghĩa"
+      },
+      "gift": {
+        "name": "Kỷ vật nhỏ của riêng bạn",
+        "description": "Món quà len cá nhân hóa từ ý tưởng của bạn. Nhắn tiệm để trao đổi thiết kế, thời gian hoàn thành và báo giá nhé.",
+        "note": "Chỉ một phiên bản"
+      }
+    }
+  },
+  "Contact": {
+    "defaultLabel": "Cùng làm điều dễ thương nhé",
+    "chat": "Nhắn tiệm nhé",
+    "contactLabel": "Liên hệ Little Loops",
+    "eyebrow": "MỘT LỜI CHÀO NHỎ",
+    "title": "Điều dễ thương bắt đầu từ một lời nhắn.",
+    "description": "Hỏi tiệm về {subject}. Chọn cách liên hệ bạn thích nhé.",
+    "defaultSubject": "một món đồ thủ công, quà tặng hay ý tưởng riêng của bạn",
+    "messageSubject": "Chào Little Loops! Mình muốn tìm hiểu thêm về {subject}.",
+    "messageDefault": "Chào Little Loops! Mình có một ý tưởng về đồ len muốn chia sẻ.",
+    "starter": "Lời nhắn gợi ý cho bạn",
+    "copy": "Sao chép lời nhắn",
+    "copied": "Đã sao chép",
+    "copyStatus": "Đã sao chép lời nhắn",
+    "comingSoon": "Sắp có",
+    "preview": "Đây là bản xem trước của tiệm. Các kênh liên hệ sẽ mở khi tiệm cập nhật tài khoản mạng xã hội.",
+    "productEyebrow": "THỦ CÔNG, DÀNH RIÊNG BẠN",
+    "view": "Xem và hỏi về {name}",
+    "samplePrice": "· giá minh họa",
+    "productNote": "Nhắn tiệm để xác nhận tình trạng sản phẩm, màu sắc, thời gian làm, giao hàng và giá cuối cùng nhé.",
+    "save": "Lưu {name}",
+    "unsave": "Bỏ lưu {name}",
+    "close": "Đóng",
+    "Zalo": "Một lời chào nhỏ, một món quà xinh.",
+    "Messenger": "Kể tiệm nghe ý tưởng của bạn.",
+    "Instagram": "Tìm cảm hứng và nhắn tiệm nhé."
+  }
+}

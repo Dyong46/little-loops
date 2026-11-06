@@ -1,5 +1,11 @@
+import type { Metadata } from "next"
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
+import { getTranslations, setRequestLocale } from "next-intl/server"
+import { hasLocale } from "next-intl"
+import { notFound } from "next/navigation"
+import { routing } from "@/i18n/routing"
+import { LanguageSwitcher } from "@/components/language-switcher"
 import {
   ArrowDown,
   ArrowRight,
@@ -21,31 +27,79 @@ import { ProductCollections } from "@/components/product-collections"
 import { ShopPhoto } from "@/components/shop-photo"
 import { shop } from "@/lib/shop"
 
-const nav = [
-  { label: "The collection", href: "#collection" },
-  { label: "Our little story", href: "#story" },
-  { label: "Made for you", href: "#custom" },
-]
-
-function Logo({ footer = false }: { footer?: boolean }) {
+async function Logo({ footer = false }: { footer?: boolean }) {
+  const t = await getTranslations("Home")
   return (
     <Link
       href="/"
       className={`brand ${footer ? "brand-footer" : ""}`}
-      aria-label="Little Loops home"
+      aria-label={t("logoAlt")}
     >
       <span className="brand-mark" aria-hidden="true">
         <Flower2 strokeWidth={1.15} />
         <span />
       </span>
       <span>
-        little loops<span className="brand-caption">HANDMADE WITH HEART</span>
+        little loops<span className="brand-caption">{t("brandCaption")}</span>
       </span>
     </Link>
   )
 }
 
-export default function Page() {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) notFound()
+  const t = await getTranslations({ locale, namespace: "Metadata" })
+  return {
+    title: t("title"),
+    description: t("description"),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: { en: "/en", vi: "/vi", "x-default": "/en" },
+    },
+    openGraph: {
+      title: t("socialTitle"),
+      description: t("description"),
+      url: `/${locale}`,
+      type: "website",
+      locale: locale === "vi" ? "vi_VN" : "en_US",
+      alternateLocale: [locale === "vi" ? "en_US" : "vi_VN"],
+      images: [
+        {
+          url: "/images/crochet-hero.png",
+          width: 1536,
+          height: 1024,
+          alt: t("imageAlt"),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: ["/images/crochet-hero.png"],
+    },
+  }
+}
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) notFound()
+  setRequestLocale(locale)
+  const t = await getTranslations("Home")
+  const nav = [
+    { label: t("navCollection"), href: "#collection" },
+    { label: t("navStory"), href: "#story" },
+    { label: t("navCustom"), href: "#custom" },
+  ]
   const instagram = shop.channels.find(
     (channel) => channel.name === "Instagram"
   )?.url
@@ -53,17 +107,16 @@ export default function Page() {
   return (
     <>
       <a href="#main" className="skip-link">
-        Skip to content
+        {t("skip")}
       </a>
       <div className="announcement">
-        <Heart className="size-3" aria-hidden="true" /> Small stitches.
-        Thoughtful gifts. A little everyday joy.{" "}
         <Heart className="size-3" aria-hidden="true" />
+        {t("announcement")} <Heart className="size-3" aria-hidden="true" />
       </div>
       <header className="site-header">
         <div className="header-inner container">
           <Logo />
-          <nav aria-label="Main navigation" className="desktop-nav">
+          <nav aria-label={t("navLabel")} className="desktop-nav">
             {nav.map((item) => (
               <a key={item.href} href={item.href}>
                 {item.label}
@@ -71,8 +124,9 @@ export default function Page() {
             ))}
           </nav>
           <div className="header-contact">
-            <ContactButton label="Say hello" className="header-hello" />
+            <ContactButton label={t("hello")} className="header-hello" />
           </div>
+          <LanguageSwitcher />
           <MobileNavigation>
             {nav.map((item) => (
               <a key={item.href} href={item.href}>
@@ -80,7 +134,8 @@ export default function Page() {
               </a>
             ))}
             <a href="#contact">
-              Say hello <ArrowUpRight aria-hidden="true" className="size-4" />
+              {t("hello")}
+              <ArrowUpRight aria-hidden="true" className="size-4" />
             </a>
           </MobileNavigation>
         </div>
@@ -90,34 +145,35 @@ export default function Page() {
         <section className="hero container" aria-labelledby="hero-title">
           <div className="hero-copy">
             <span className="eyebrow">
-              <span className="tiny-line" /> A LITTLE YARN. A LOT OF LOVE.
+              <span className="tiny-line" />
+              {t("heroEyebrow")}
             </span>
             <h1 id="hero-title" data-motion-hero>
-              Little things,
+              {t("heroStart")}
               <br />
-              made with{" "}
+              {t("heroMiddle")}{" "}
               <span className="hero-love">
-                big love.
+                {t("heroEnd")}
                 <svg viewBox="0 0 300 16" aria-hidden="true">
                   <path d="M3 11 Q110 -2 294 7 M20 15 Q150 3 273 12" />
                 </svg>
               </span>
             </h1>
             <p data-motion-hero>
-              Soft stitches, sweet details, and a little bit of magic.
-              <br className="hidden lg:block" /> Handmade crochet treasures to
-              keep close
-              <br className="hidden lg:block" /> or gift to someone special.
+              {t("heroDescription1")}
+              <br className="hidden lg:block" /> {t("heroDescription2")}
+              <br className="hidden lg:block" /> {t("heroDescription3")}
             </p>
             <div className="hero-actions" data-motion-hero>
               <a
                 href="#collection"
                 className={`${buttonVariants()} shop-button`}
               >
-                Explore the collection <ArrowUpRight aria-hidden="true" />
+                {t("explore")}
+                <ArrowUpRight aria-hidden="true" />
               </a>
               <a href="#custom" className="text-link">
-                Something just for you{" "}
+                {t("personal")}{" "}
                 <ArrowRight aria-hidden="true" className="size-4" />
               </a>
             </div>
@@ -127,32 +183,28 @@ export default function Page() {
                 <Heart />
                 <Heart />
               </span>
-              <span>Made slowly. Loved for a long time.</span>
+              <span>{t("heroFootnote")}</span>
             </div>
           </div>
           <div className="hero-visual">
             <div className="hero-image">
               <Image
                 src="/images/crochet-hero.png"
-                alt="Cream crochet bunny in a rose scarf, with soft yarn and handmade tulips on warm linen"
+                alt={t("heroAlt")}
                 fill
                 preload
                 sizes="(max-width: 767px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>
-            <div
-              className="handmade-seal"
-              aria-label="One of a kind, always handmade"
-            >
+            <div className="handmade-seal" aria-label={t("sealAlt")}>
               <Heart aria-hidden="true" />
-              <span>one of a kind</span>
-              <strong>just like you</strong>
-              <span className="seal-bottom">HANDMADE WITH LOVE</span>
+              <span>{t("sealTop")}</span>
+              <strong>{t("sealMiddle")}</strong>
+              <span className="seal-bottom">{t("sealBottom")}</span>
             </div>
             <span className="hero-note">
-              a hug, in handmade form{" "}
-              <Heart aria-hidden="true" className="size-4" />
+              {t("heroNote")} <Heart aria-hidden="true" className="size-4" />
             </span>
             <Sparkles
               className="hero-sparkle"
@@ -165,18 +217,19 @@ export default function Page() {
           <div className="values-inner container">
             <span>
               <Heart aria-hidden="true" />
-              Made by hand, with heart
+              {t("value1")}
             </span>
             <span>
               <Leaf aria-hidden="true" />
-              Soft yarn, thoughtful details
+              {t("value2")}
             </span>
             <span>
-              <Sparkles aria-hidden="true" />A little different. All yours.
+              <Sparkles aria-hidden="true" />
+              {t("value3")}
             </span>
             <span>
               <Package aria-hidden="true" />
-              Ready to make someone smile
+              {t("value4")}
             </span>
           </div>
         </div>
@@ -190,7 +243,7 @@ export default function Page() {
             <div className="story-photo">
               <Image
                 src="/images/crochet-hero.png"
-                alt="Handcrafted crochet bunny and yarn, showing the detail in every stitch"
+                alt={t("storyAlt")}
                 fill
                 sizes="(max-width: 767px) 100vw, 45vw"
                 className="object-cover"
@@ -198,34 +251,26 @@ export default function Page() {
             </div>
             <div className="story-caption">
               <Scissors aria-hidden="true" className="size-5" />
-              <span>A slower kind of lovely.</span>
+              <span>{t("storyCaption")}</span>
             </div>
           </div>
           <div className="story-copy" data-motion-reveal>
-            <span className="eyebrow">HELLO FROM OUR LITTLE CORNER</span>
-            <h2>
-              A little yarn.
-              <br />A little patience.
+            <span className="eyebrow">{t("storyEyebrow")}</span>
+            <h2 id="story-title">
+              {t("storyLine1")}
               <br />
-              <em>A whole lot of heart.</em>
+              {t("storyLine2")}
+              <br />
+              <em>{t("storyLine3")}</em>
             </h2>
-            <p>
-              There’s something special about a thing made by hand. The tiny
-              details. The personality in every stitch. The feeling that it was
-              made just for you.
-            </p>
-            <p>
-              That’s the heart of Little Loops. A small crochet shop making soft
-              companions, forever flowers, and everyday keepsakes — one
-              thoughtful stitch at a time.
-            </p>
+            <p>{t("storyParagraph1")}</p>
+            <p>{t("storyParagraph2")}</p>
             <a href="#custom" className="text-link">
-              Let’s create something meaningful{" "}
+              {t("storyCta")}{" "}
               <ArrowRight aria-hidden="true" className="size-4" />
             </a>
             <span className="story-signature">
-              with love, Little Loops{" "}
-              <Heart aria-hidden="true" className="size-5" />
+              {t("signature")} <Heart aria-hidden="true" className="size-5" />
             </span>
           </div>
         </section>
@@ -236,24 +281,16 @@ export default function Page() {
         >
           <div className="custom-card" data-motion-reveal>
             <div className="custom-copy">
-              <span className="eyebrow">
-                YOUR IDEA. OUR HAPPY LITTLE HANDS.
-              </span>
+              <span className="eyebrow">{t("customEyebrow")}</span>
               <h2 id="custom-title">
-                Dream it. We’ll <em>stitch it.</em>
+                {t("customStart")} <em>{t("customEnd")}</em>
               </h2>
-              <p>
-                A favorite color, a tiny lookalike, a gift with their name on
-                it. Let’s turn your little idea into something wonderfully
-                personal.
-              </p>
+              <p>{t("customDescription")}</p>
               <ContactButton
-                subject="a custom crochet order"
-                label="Let’s make it yours"
+                subject={t("customSubject")}
+                label={t("customCta")}
               />
-              <span className="custom-fineprint">
-                A conversation first. A keepsake to follow.
-              </span>
+              <span className="custom-fineprint">{t("customNote")}</span>
             </div>
             <div className="custom-decoration">
               <Flower2
@@ -263,13 +300,13 @@ export default function Page() {
               />
               <ShopPhoto
                 item="flowers"
-                alt="Pink and ivory crochet tulips for a personalized handmade bouquet"
+                alt={t("customAlt")}
                 sizes="(max-width: 767px) 100vw, 60vw"
               />
               <span className="custom-sticker">
-                made for
+                {t("stickerStart")}
                 <br />
-                <em>only you.</em>
+                <em>{t("stickerEnd")}</em>
               </span>
             </div>
           </div>
@@ -279,39 +316,30 @@ export default function Page() {
           aria-labelledby="testimonial-title"
         >
           <div className="center-heading" data-motion-reveal>
-            <span className="eyebrow">LITTLE NOTES, WARM HEARTS</span>
-            <h2 id="testimonial-title">The sweetest part? Your smiles.</h2>
-            <p className="sample-note">
-              Sample notes to preview this space. Real customer stories coming
-              soon.
-            </p>
+            <span className="eyebrow">{t("reviewsEyebrow")}</span>
+            <h2 id="testimonial-title">{t("reviewsTitle")}</h2>
+            <p className="sample-note">{t("reviewsNote")}</p>
           </div>
           <div className="testimonial-grid" data-motion-grid>
             {[
               {
-                quote:
-                  "Even sweeter in person. The little details make it feel so special — my new favorite desk companion.",
-                name: "A little desk-side joy",
-                item: "Crochet plushie",
+                quote: t("reviewQuote1"),
+                name: t("reviewName1"),
+                item: t("reviewItem1"),
               },
               {
-                quote:
-                  "A bouquet that I can keep forever. Such a thoughtful way to say a little thank you.",
-                name: "Flowers, with a little forever",
-                item: "Crochet flowers",
+                quote: t("reviewQuote2"),
+                name: t("reviewName2"),
+                item: t("reviewItem2"),
               },
               {
-                quote:
-                  "From the colors to the tiny finishing touches, it feels like a gift made just for me.",
-                name: "Something wonderfully personal",
-                item: "Custom keepsake",
+                quote: t("reviewQuote3"),
+                name: t("reviewName3"),
+                item: t("reviewItem3"),
               },
             ].map((review) => (
               <figure className="testimonial" key={review.name}>
-                <div
-                  className="review-stars"
-                  aria-label="Illustrative five-star rating"
-                >
+                <div className="review-stars" aria-label={t("reviewRating")}>
                   {Array.from({ length: 5 }, (_, i) => (
                     <Star
                       key={i}
@@ -327,7 +355,10 @@ export default function Page() {
                   </span>
                   <span>
                     <strong>{review.name}</strong>
-                    <span>{review.item} · sample story</span>
+                    <span>
+                      {review.item}
+                      {t("sampleStory")}
+                    </span>
                   </span>
                   <Heart aria-hidden="true" className="review-heart size-4" />
                 </figcaption>
@@ -343,8 +374,8 @@ export default function Page() {
           <div className="container">
             <div className="section-heading" data-motion-reveal>
               <div>
-                <span className="eyebrow">A PEEK BEHIND THE STITCHES</span>
-                <h2 id="instagram-title">Our little everyday.</h2>
+                <span className="eyebrow">{t("instagramEyebrow")}</span>
+                <h2 id="instagram-title">{t("instagramTitle")}</h2>
               </div>
               {instagram ? (
                 <a
@@ -353,13 +384,13 @@ export default function Page() {
                   rel="noopener noreferrer"
                   className="text-link"
                 >
-                  <Instagram aria-hidden="true" className="size-4" /> Find us on
-                  Instagram{" "}
+                  <Instagram aria-hidden="true" className="size-4" />
+                  {t("instagramCta")}{" "}
                   <ArrowUpRight aria-hidden="true" className="size-4" />
                 </a>
               ) : (
                 <ContactButton
-                  label="Follow our little journey"
+                  label={t("followCta")}
                   className="instagram-button"
                 />
               )}
@@ -375,11 +406,11 @@ export default function Page() {
                       item={item}
                       alt={
                         [
-                          "Soft pink handmade tulips",
-                          "A crochet bunny waiting for a hug",
-                          "A cream crochet bag for everyday adventures",
-                          "A tiny bear keychain",
-                          "Crochet blooms in soft spring colors",
+                          t("galleryAlt1"),
+                          t("galleryAlt2"),
+                          t("galleryAlt3"),
+                          t("galleryAlt4"),
+                          t("galleryAlt5"),
                         ][index]
                       }
                       sizes="(max-width: 640px) 100vw, 40vw"
@@ -391,9 +422,7 @@ export default function Page() {
                 )
               )}
             </div>
-            <p className="sample-note">
-              A little inspiration board of our sample creations.
-            </p>
+            <p className="sample-note">{t("instagramNote")}</p>
           </div>
         </section>
         <section
@@ -402,9 +431,9 @@ export default function Page() {
           data-motion-reveal
         >
           <Flower2 aria-hidden="true" strokeWidth={1} />
-          <h2>Something lovely starts with hello.</h2>
-          <p>Found a favorite? Have a little idea? We’d love to hear it.</p>
-          <ContactButton label="Come say hello" />
+          <h2>{t("closingTitle")}</h2>
+          <p>{t("closingDescription")}</p>
+          <ContactButton label={t("closingCta")} />
         </section>
       </main>
       <footer className="site-footer">
@@ -412,19 +441,19 @@ export default function Page() {
           <div>
             <Logo footer />
             <p>
-              Little handmade treasures.
+              {t("footerLine1")}
               <br />
-              For your favorite people, and you.
+              {t("footerLine2")}
             </p>
           </div>
           <div>
-            <h2>Wander a little</h2>
-            <a href="#collection">The collection</a>
-            <a href="#story">Our little story</a>
-            <a href="#custom">Custom creations</a>
+            <h2>{t("footerExplore")}</h2>
+            <a href="#collection">{t("navCollection")}</a>
+            <a href="#story">{t("navStory")}</a>
+            <a href="#custom">{t("footerCustom")}</a>
           </div>
           <div>
-            <h2>Let’s be friends</h2>
+            <h2>{t("footerSocial")}</h2>
             {shop.channels.map((channel) =>
               channel.url ? (
                 <a
@@ -438,7 +467,7 @@ export default function Page() {
                 </a>
               ) : (
                 <span className="footer-channel" key={channel.name}>
-                  {channel.name} <span>· coming soon</span>
+                  {channel.name} <span>{t("comingSoon")}</span>
                 </span>
               )
             )}
@@ -446,23 +475,22 @@ export default function Page() {
           <div className="footer-note">
             <Heart aria-hidden="true" strokeWidth={1.2} />
             <p>
-              Every loop has a little love in it.
+              {t("footerNote1")}
               <br />
-              <em>Thank you for being here.</em>
+              <em>{t("footerNote2")}</em>
             </p>
             <a href="#main" className="text-link">
-              Back to the lovely things{" "}
+              {t("backTop")}{" "}
               <ArrowDown className="size-3 rotate-180" aria-hidden="true" />
             </a>
           </div>
         </div>
         <div className="footer-bottom container">
           <span>
-            © {new Date().getFullYear()} Little Loops. Made with heart.
+            © {new Date().getFullYear()} {t("copyright")}
           </span>
           <span>
-            Concept storefront · sample content{" "}
-            <Heart aria-hidden="true" className="size-3" />
+            {t("preview")} <Heart aria-hidden="true" className="size-3" />
           </span>
         </div>
       </footer>

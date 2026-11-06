@@ -3,10 +3,12 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react"
 import { AnimatePresence, motion, useIsPresent } from "motion/react"
 import { useShopReducedMotion } from "@/hooks/use-shop-reduced-motion"
+import { useTranslations } from "next-intl"
 import { Menu } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
 
 export function MobileNavigation({ children }: { children: ReactNode }) {
+  const t = useTranslations("Navigation")
   const [open, setOpen] = useState(false)
   const root = useRef<HTMLDivElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)
@@ -39,7 +41,7 @@ export function MobileNavigation({ children }: { children: ReactNode }) {
         ref={trigger}
         type="button"
         className={`${buttonVariants({ variant: "ghost" })} mobile-nav-toggle`}
-        aria-label={open ? "Close navigation" : "Open navigation"}
+        aria-label={t(open ? "close" : "open")}
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen((current) => !current)}
@@ -66,12 +68,13 @@ function NavigationPanel({
   close: () => void
   children: ReactNode
 }) {
+  const t = useTranslations("Navigation")
   const present = useIsPresent()
   const reducedMotion = useShopReducedMotion()
   return (
     <motion.nav
       id={id}
-      aria-label="Mobile navigation"
+      aria-label={t("label")}
       inert={!present}
       initial={reducedMotion ? false : { opacity: 0, y: -8, scale: 0.985 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}

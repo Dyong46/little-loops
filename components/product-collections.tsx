@@ -1,12 +1,34 @@
 "use client"
 
 import { useState } from "react"
+import { useFormatter, useTranslations } from "next-intl"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { ShopPhoto } from "@/components/shop-photo"
 import { ProductDetails, SaveProduct } from "@/components/shop-interactions"
-import { categories, products } from "@/lib/shop"
+import { categories as categoryData, products as productData } from "@/lib/shop"
 
 export function ProductCollections() {
+  const t = useTranslations("Catalog")
+  const format = useFormatter()
+  const categories = categoryData.map((category) => ({
+    ...category,
+    name: t(`categories.${category.id}.name`),
+    subtitle: t(`categories.${category.id}.subtitle`),
+  }))
+  const products = productData.map((product) => ({
+    ...product,
+    name: t(`products.${product.id}.name`),
+    description: t(`products.${product.id}.description`),
+    note: t(`products.${product.id}.note`),
+    price:
+      product.amount === null
+        ? t("quote")
+        : format.number(product.amount, {
+            style: "currency",
+            currency: "VND",
+            maximumFractionDigits: 0,
+          }),
+  }))
   const [categoryId, setCategoryId] = useState<string | null>(null)
   const selectedCategory = categories.find(
     (category) => category.id === categoryId
@@ -34,9 +56,9 @@ export function ProductCollections() {
         aria-labelledby="category-title"
       >
         <div className="center-heading">
-          <span className="eyebrow">FIND YOUR LITTLE JOY</span>
-          <h2 id="category-title">A lovely little world of crochet.</h2>
-          <p>For the cuddles, the everyday, and the just-because moments.</p>
+          <span className="eyebrow">{t("eyebrow")}</span>
+          <h2 id="category-title">{t("title")}</h2>
+          <p>{t("description")}</p>
         </div>
         <div className="category-grid">
           {categories.map((category, index) => (
@@ -49,7 +71,7 @@ export function ProductCollections() {
               <div className={`category-image category-${index}`}>
                 <ShopPhoto
                   item={category.image}
-                  alt={`Handmade crochet ${category.subtitle.toLowerCase()}`}
+                  alt={t("alt", { category: category.subtitle })}
                   sizes="(max-width: 640px) 60vw, 30vw"
                 />
               </div>
@@ -70,11 +92,11 @@ export function ProductCollections() {
         <div className="container">
           <div className="section-heading">
             <div>
-              <span className="eyebrow">FROM OUR HANDS TO YOUR HEART</span>
+              <span className="eyebrow">{t("collectionEyebrow")}</span>
               <h2 id="collection-title">
                 {selectedCategory
                   ? selectedCategory.name
-                  : "Meet your new favorites."}
+                  : t("collectionTitle")}
               </h2>
             </div>
             <button
@@ -82,17 +104,17 @@ export function ProductCollections() {
               onClick={() => selectCategory(selectedCategory ? null : "gifts")}
               className="text-link"
             >
-              {selectedCategory ? "View all favorites" : "Find a personal gift"}{" "}
+              {selectedCategory ? t("viewAll") : t("gift")}{" "}
               <ArrowRight className="size-4" aria-hidden="true" />
             </button>
           </div>
-          <div className="filter-row" aria-label="Filter collection">
+          <div className="filter-row" aria-label={t("filter")}>
             <button
               type="button"
               onClick={() => selectCategory(null)}
               aria-pressed={!selectedCategory}
             >
-              All the lovely things
+              {t("all")}
             </button>
             {categories.map((category) => (
               <button
@@ -116,10 +138,10 @@ export function ProductCollections() {
                   />
                   <span className="product-tag">
                     {product.id === "bunny"
-                      ? "Much-loved little one"
+                      ? t("favoriteTag")
                       : product.id === "flowers"
-                        ? "Forever in bloom"
-                        : "Handmade with love"}
+                        ? t("flowerTag")
+                        : t("handmadeTag")}
                   </span>
                   <SaveProduct name={product.name} />
                 </div>
@@ -134,10 +156,7 @@ export function ProductCollections() {
               </article>
             ))}
           </div>
-          <p className="sample-note">
-            A peek at what’s possible — illustrative products, imagery, and
-            prices. Each piece is made to order.
-          </p>
+          <p className="sample-note">{t("sample")}</p>
         </div>
       </section>
     </>

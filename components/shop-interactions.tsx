@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import {
   ArrowUpRight,
   Check,
@@ -27,14 +28,15 @@ type ContactProps = {
 }
 
 function Channels({ subject }: { subject?: string }) {
+  const t = useTranslations("Contact")
   const [copied, setCopied] = useState(false)
   const message = subject
-    ? `Hello Little Loops! I would love to know more about ${subject}.`
-    : "Hello Little Loops! I have a crochet idea in mind."
+    ? t("messageSubject", { subject })
+    : t("messageDefault")
   return (
     <div className="space-y-3">
       <div className="rounded-xl bg-secondary/60 p-4 text-sm leading-relaxed">
-        <p className="mb-2 font-medium">Your conversation starter</p>
+        <p className="mb-2 font-medium">{t("starter")}</p>
         <p className="text-muted-foreground">{message}</p>
         <Button
           variant="link"
@@ -50,14 +52,14 @@ function Channels({ subject }: { subject?: string }) {
         >
           {copied ? (
             <>
-              <Check aria-hidden="true" /> Copied
+              <Check aria-hidden="true" /> {t("copied")}
             </>
           ) : (
-            "Copy message"
+            t("copy")
           )}
         </Button>
         <span className="sr-only" role="status">
-          {copied ? "Message copied to clipboard" : ""}
+          {copied ? t("copyStatus") : ""}
         </span>
       </div>
       {shop.channels.map((channel, index) => {
@@ -75,7 +77,7 @@ function Channels({ subject }: { subject?: string }) {
             <span className="flex-1">
               <strong className="block font-medium">{channel.name}</strong>
               <span className="text-xs text-muted-foreground">
-                {channel.detail}
+                {t(channel.name)}
               </span>
             </span>
             <ArrowUpRight aria-hidden="true" className="size-4" />
@@ -84,14 +86,15 @@ function Channels({ subject }: { subject?: string }) {
           <div key={channel.name} className="channel-link bg-muted/40">
             <Icon aria-hidden="true" className="size-5 text-muted-foreground" />
             <span className="flex-1 font-medium">{channel.name}</span>
-            <span className="text-xs text-muted-foreground">Coming soon</span>
+            <span className="text-xs text-muted-foreground">
+              {t("comingSoon")}
+            </span>
           </div>
         )
       })}
       {!shop.channels.some((channel) => channel.url) && (
         <p className="text-xs leading-relaxed text-muted-foreground">
-          This is a shop preview. Contact channels will be available when the
-          shop adds its social accounts.
+          {t("preview")}
         </p>
       )}
     </div>
@@ -99,41 +102,42 @@ function Channels({ subject }: { subject?: string }) {
 }
 
 export function ContactButton({
-  label = "Let’s make something lovely",
+  label,
   className = "",
   subject,
   floating = false,
 }: ContactProps) {
+  const t = useTranslations("Contact")
   return (
     <Dialog>
       <DialogTrigger
         className={`${buttonVariants()} ${floating ? "contact-fab" : `shop-button ${className}`}`}
         type="button"
-        aria-label={floating ? "Contact Little Loops" : undefined}
+        aria-label={floating ? t("contactLabel") : undefined}
         data-motion-contact={floating ? "" : undefined}
       >
         {floating ? (
           <span className="flex items-center gap-2">
             <MessageCircle aria-hidden="true" className="size-5" />
-            <span className="hidden sm:inline">Let’s chat</span>
+            <span className="hidden sm:inline">{t("chat")}</span>
           </span>
         ) : (
           <>
-            {label}
+            {label ?? t("defaultLabel")}
             <ArrowUpRight aria-hidden="true" />
           </>
         )}
       </DialogTrigger>
-      <DialogContent className="max-h-[90dvh] overflow-y-auto rounded-3xl p-7 sm:max-w-md">
-        <span className="eyebrow">A LITTLE HELLO</span>
+      <DialogContent
+        closeLabel={t("close")}
+        className="max-h-[90dvh] overflow-y-auto rounded-3xl p-7 sm:max-w-md"
+      >
+        <span className="eyebrow">{t("eyebrow")}</span>
         <DialogTitle className="font-editorial text-3xl font-normal">
-          Lovely things start with a chat.
+          {t("title")}
         </DialogTitle>
         <DialogDescription>
-          Ask about{" "}
-          {subject ||
-            "a handmade piece, a thoughtful gift, or an idea of your own"}
-          . Choose your favorite way to say hello.
+          {t("description", { subject: subject || t("defaultSubject") })}
         </DialogDescription>
         <Channels subject={subject} />
       </DialogContent>
@@ -142,18 +146,22 @@ export function ContactButton({
 }
 
 export function ProductDetails({ product }: { product: Product }) {
+  const t = useTranslations("Contact")
   return (
     <Dialog>
       <DialogTrigger
         render={
           <Button variant="ghost" size="icon" className="product-enquiry" />
         }
-        aria-label={`View ${product.name} and enquire`}
+        aria-label={t("view", { name: product.name })}
       >
         <ArrowUpRight aria-hidden="true" />
       </DialogTrigger>
-      <DialogContent className="max-h-[90dvh] overflow-y-auto rounded-3xl p-7 sm:max-w-md">
-        <span className="eyebrow">HANDMADE, JUST FOR YOU</span>
+      <DialogContent
+        closeLabel={t("close")}
+        className="max-h-[90dvh] overflow-y-auto rounded-3xl p-7 sm:max-w-md"
+      >
+        <span className="eyebrow">{t("productEyebrow")}</span>
         <DialogTitle className="font-editorial text-3xl font-normal">
           {product.name}
         </DialogTitle>
@@ -161,13 +169,10 @@ export function ProductDetails({ product }: { product: Product }) {
         <p className="text-lg font-medium text-primary">
           {product.price}{" "}
           <span className="text-xs font-normal text-muted-foreground">
-            · sample price
+            {t("samplePrice")}
           </span>
         </p>
-        <p className="text-sm text-muted-foreground">
-          Message us to confirm availability, colors, production time, delivery,
-          and your final quote.
-        </p>
+        <p className="text-sm text-muted-foreground">{t("productNote")}</p>
         <Channels subject={product.name} />
       </DialogContent>
     </Dialog>
@@ -175,6 +180,7 @@ export function ProductDetails({ product }: { product: Product }) {
 }
 
 export function SaveProduct({ name }: { name: string }) {
+  const t = useTranslations("Contact")
   const [saved, setSaved] = useState(false)
   return (
     <Button
@@ -182,7 +188,7 @@ export function SaveProduct({ name }: { name: string }) {
       size="icon"
       className="save-product"
       onClick={() => setSaved(!saved)}
-      aria-label={`${saved ? "Unsave" : "Save"} ${name}`}
+      aria-label={t(saved ? "unsave" : "save", { name })}
       aria-pressed={saved}
     >
       <Heart

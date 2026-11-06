@@ -1599,3 +1599,34 @@ button.text-link:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 5px;
 }
+
+.language-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  color: var(--foreground);
+}
+.language-switcher select {
+  min-height: 44px;
+  padding: 6px;
+  font-size: 12px;
+  border-radius: 8px;
+  background: var(--background);
+  cursor: pointer;
+}
+.language-switcher select:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+.language-switcher[aria-busy="true"] {
+  opacity: 0.6;
+}
+@media (max-width: 440px) {
+  .header-inner {
+    gap: 8px;
+  }
+  .language-switcher {
+    gap: 2px;
+  }
+}
