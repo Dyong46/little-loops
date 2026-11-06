@@ -12,11 +12,13 @@ The homepage is a Server Component. The category and featured-product sections f
 
 ## Shop configuration
 
-Add the public variables listed in `shop.env.example` to your local or deployment environment. Do not overwrite an existing `.env` file. Set actual Zalo, Messenger, and Instagram URLs to enable those destinations; unset channels display an honest coming-soon state. A message can be copied from the enquiry dialog before opening a channel. Nothing is automatically sent.
+Configure Sanity and the deployment origin using `shop.env.example`. Manage Zalo, Messenger, and Instagram under **Studio → Thông tin shop**, then Publish. Missing channels show a coming-soon state. Contact actions never send messages automatically.
 
-Set `NEXT_PUBLIC_SITE_URL` to the absolute production origin for canonical and social URLs. Vercel’s `VERCEL_PROJECT_PRODUCTION_URL` is used as a fallback when present. Indexing is disabled without either value. Rebuild after changing public variables.
+The Server Component reads published Sanity categories, products, images and contact settings through `sanity/lib/storefront.ts`. Vietnamese/English product copy and image alternatives come from the CMS; interface labels remain in `messages/`. Queries have generated types (`npm run sanity:typegen`). The server-only read token is never sent to the browser. Cache revalidation runs after 60 seconds on traffic; a subsequent reload may be needed after background refresh. Content changes do not require redeployment. Filters remain local state and do not change the URL.
 
-Catalog IDs, images, and numeric prices are centralized in `lib/shop.ts`; localized names and descriptions live in `messages/en.json` and `messages/vi.json`. The Little Loops identity, products, prices, testimonials, and AI-generated imagery are illustrative; replace these with the shop's approved content before launch. The Instagram section is a static inspiration gallery, with no embedded feed or tracking scripts.
+See [Sanity setup](docs/sanity-setup.md) for publishing, visibility, featured products and local/production datasets. The existing hero image and clearly marked illustrative testimonials remain editorial homepage content. The lower gallery now uses product images from Sanity, rather than an Instagram feed.
+
+Set `NEXT_PUBLIC_SITE_URL` to the production origin for SEO; Vercel’s `VERCEL_PROJECT_PRODUCTION_URL` is the fallback. Rebuild when environment variables change.
 
 ## Design system and assets
 
@@ -24,7 +26,6 @@ Catalog IDs, images, and numeric prices are centralized in `lib/shop.ts`; locali
 
 Generated with the built-in imagegen tool:
 - `public/images/crochet-hero.png`: warm editorial photography of a cream crochet bunny, dusty-pink scarf, soft yarn, crochet tulips, and linen.
-- `public/images/crochet-collection.png`: a four-quadrant product photography sheet of a bunny, tulips, market bag, and bear keychain; quadrants are framed with CSS.
 
 ## Validation
 
@@ -37,7 +38,7 @@ npm run build
 The repository-wide lint command currently reports pre-existing errors in `.agents/skills/**` CommonJS scripts and `components/ui/carousel.tsx` (`react-hooks/set-state-in-effect`). The homepage's files pass scoped ESLint:
 
 ```sh
-npm run lint -- app/page.tsx app/layout.tsx components/shop-interactions.tsx components/shop-photo.tsx lib/shop.ts
+npm run lint -- app/ components/shop-interactions.tsx components/shop-photo.tsx components/product-collections.tsx lib/shop.ts sanity/ sanity.cli.ts next.config.ts
 ```
 
 The default Turbopack build encountered an environment helper-port permission error. The supported compiler fallback passes:
@@ -76,14 +77,14 @@ app/[locale]/page.tsx         Server-rendered copy and localized metadata
 app/[locale]/not-found.tsx    Localized 404
 app/[locale]/[...rest]/page.tsx  Unmatched-page 404 boundary
 proxy.ts                     Locale negotiation and redirects (Next.js 16)
-i18n/routing.ts              Supported locales en/vi, default en, always prefixed
+i18n/routing.ts              Supported locales en/vi, default vi, always prefixed
 i18n/request.ts              Per-request message loading
 i18n/navigation.ts           Locale-aware navigation helpers
 messages/en.json
 messages/vi.json
 ```
 
-`/en` and `/vi` are statically generated. `/` negotiates the locale using next-intl’s locale cookie and browser language, falling back to English. Assets, API paths, and Vercel internals are excluded from locale rewriting. Unsupported paths return 404.
+`/en` and `/vi` are statically generated. `/` negotiates the locale using next-intl’s locale cookie and browser language, falling back to Vietnamese. Assets, API paths, and Vercel internals are excluded from locale rewriting. Unsupported paths return 404.
 
 The header language selector uses locale-aware navigation to keep the current pathname, query string, and fragment with `scroll: false`; it does not send users back to the homepage. Future localized routes can use the same helper. Filter selection remains local React state and never becomes a URL parameter.
 

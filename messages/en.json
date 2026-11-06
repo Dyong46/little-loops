@@ -45,7 +45,7 @@
     "instagramEyebrow": "A PEEK BEHIND THE STITCHES",
     "instagramTitle": "Our little everyday.",
     "instagramCta": "Find us on Instagram",
-    "instagramNote": "A little inspiration board of our sample creations.",
+    "instagramNote": "A closer look at our handmade collection.",
     "closingTitle": "Something lovely starts with hello.",
     "closingDescription": "Found a favorite? Have a little idea? We’d love to hear it.",
     "footerLine1": "Little handmade treasures.",
@@ -60,7 +60,7 @@
     "footerNote2": "Thank you for being here.",
     "backTop": "Back to the lovely things",
     "copyright": "Little Loops. Made with heart.",
-    "preview": "Concept storefront · sample content",
+    "preview": "A little love in every stitch",
     "navCustom": "Made for you",
     "logoAlt": "Little Loops home",
     "navLabel": "Main navigation",
@@ -81,11 +81,6 @@
     "reviewItem3": "Custom keepsake",
     "reviewRating": "Illustrative five-star rating",
     "followCta": "Follow our little journey",
-    "galleryAlt1": "Soft pink handmade tulips",
-    "galleryAlt2": "A crochet bunny waiting for a hug",
-    "galleryAlt3": "A cream crochet bag for everyday adventures",
-    "galleryAlt4": "A tiny bear keychain",
-    "galleryAlt5": "Crochet blooms in soft spring colors",
     "closingCta": "Come say hello"
   },
   "Navigation": {
@@ -119,60 +114,18 @@
     "filter": "Filter collection",
     "all": "All the lovely things",
     "sample": "A peek at what’s possible — illustrative products, imagery, and prices. Each piece is made to order.",
-    "alt": "Handmade crochet {category}",
-    "favoriteTag": "Much-loved little one",
-    "flowerTag": "Forever in bloom",
     "handmadeTag": "Handmade with love",
     "quote": "Quoted for you",
-    "categories": {
-      "plushies": {
-        "name": "Cuddly friends",
-        "subtitle": "Plushies"
-      },
-      "flowers": {
-        "name": "Forever flowers",
-        "subtitle": "Flowers"
-      },
-      "bags": {
-        "name": "Everyday lovely",
-        "subtitle": "Bags"
-      },
-      "keychains": {
-        "name": "Little companions",
-        "subtitle": "Keychains"
-      },
-      "gifts": {
-        "name": "Just for you",
-        "subtitle": "Personalized gifts"
-      }
+    "kinds": {
+      "plushies": "Plushies",
+      "flowers": "Flowers",
+      "bags": "Bags",
+      "keychains": "Keychains",
+      "gifts": "Personalized gifts"
     },
-    "products": {
-      "bunny": {
-        "name": "Rosie the little bunny",
-        "description": "A soft little friend with floppy ears and a blush scarf. Choose a color to make Rosie your own.",
-        "note": "A little favorite"
-      },
-      "flowers": {
-        "name": "A pocketful of tulips",
-        "description": "A bouquet of crochet tulips that stays lovely. Pick your favorite shades and the number of stems.",
-        "note": "Made to make them smile"
-      },
-      "bag": {
-        "name": "Sunday market bag",
-        "description": "An easygoing crochet companion for slow mornings and everyday adventures. Ask us about colors and sizing.",
-        "note": "For your everyday"
-      },
-      "bear": {
-        "name": "Tiny bear, big heart",
-        "description": "A tiny crochet bear to carry a little joy on your keys or bag. Personalize with your favorite color.",
-        "note": "A thoughtful little gift"
-      },
-      "gift": {
-        "name": "Your own little keepsake",
-        "description": "A personalized crochet keepsake inspired by your idea. Message us to discuss the design, timing, and quote.",
-        "note": "One of a kind"
-      }
-    }
+    "orderNote": "Message us to confirm colors, timing, and your favorite handmade piece.",
+    "empty": "No pieces in this collection yet. Visit us again soon!",
+    "unavailable": "Currently unavailable"
   },
   "Contact": {
     "defaultLabel": "Let’s make something lovely",

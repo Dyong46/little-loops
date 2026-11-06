@@ -73,15 +73,11 @@ export default async function LocaleLayout({
     ])
   )
   return (
-    <html
-      lang={locale}
-      suppressHydrationWarning
-      className={cn("font-sans antialiased", inter.variable)}
-    >
+    <html lang={locale} className={cn("font-sans antialiased", inter.variable)}>
       <body>
         <NextIntlClientProvider locale={locale} messages={clientMessages}>
           <QueryProvider>
-            <ThemeProvider forcedTheme="light">
+            <ThemeProvider defaultTheme="light">
               <TooltipProvider>{children}</TooltipProvider>
               <Toaster />
             </ThemeProvider>

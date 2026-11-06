@@ -5,21 +5,19 @@ import { useFormatter, useTranslations } from "next-intl"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { ShopPhoto } from "@/components/shop-photo"
 import { ProductDetails, SaveProduct } from "@/components/shop-interactions"
-import { categories as categoryData, products as productData } from "@/lib/shop"
+import type { CatalogProduct, Category } from "@/lib/shop"
 
-export function ProductCollections() {
+export function ProductCollections({
+  categories,
+  products: productData,
+}: {
+  categories: Category[]
+  products: CatalogProduct[]
+}) {
   const t = useTranslations("Catalog")
   const format = useFormatter()
-  const categories = categoryData.map((category) => ({
-    ...category,
-    name: t(`categories.${category.id}.name`),
-    subtitle: t(`categories.${category.id}.subtitle`),
-  }))
   const products = productData.map((product) => ({
     ...product,
-    name: t(`products.${product.id}.name`),
-    description: t(`products.${product.id}.description`),
-    note: t(`products.${product.id}.note`),
     price:
       product.amount === null
         ? t("quote")
@@ -29,13 +27,14 @@ export function ProductCollections() {
             maximumFractionDigits: 0,
           }),
   }))
+  const giftCategory = categories.find((category) => category.kind === "gifts")
   const [categoryId, setCategoryId] = useState<string | null>(null)
   const selectedCategory = categories.find(
     (category) => category.id === categoryId
   )
   const visibleProducts = selectedCategory
     ? products.filter((product) => product.category === selectedCategory.id)
-    : products.slice(0, 4)
+    : products.filter((product) => product.featured).slice(0, 4)
 
   function selectCategory(id: string | null, scrollToCollection = false) {
     setCategoryId(id)
@@ -70,14 +69,14 @@ export function ProductCollections() {
             >
               <div className={`category-image category-${index}`}>
                 <ShopPhoto
-                  item={category.image}
-                  alt={t("alt", { category: category.subtitle })}
+                  src={category.image}
+                  alt={category.imageAlt}
                   sizes="(max-width: 640px) 60vw, 30vw"
                 />
               </div>
               <h3>{category.name}</h3>
               <span>
-                {category.subtitle}{" "}
+                {t(`kinds.${category.kind}`)}{" "}
                 <ArrowUpRight className="size-3" aria-hidden="true" />
               </span>
             </button>
@@ -99,14 +98,20 @@ export function ProductCollections() {
                   : t("collectionTitle")}
               </h2>
             </div>
-            <button
-              type="button"
-              onClick={() => selectCategory(selectedCategory ? null : "gifts")}
-              className="text-link"
-            >
-              {selectedCategory ? t("viewAll") : t("gift")}{" "}
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </button>
+            {(selectedCategory || giftCategory) && (
+              <button
+                type="button"
+                onClick={() =>
+                  selectCategory(
+                    selectedCategory ? null : (giftCategory?.id ?? null)
+                  )
+                }
+                className="text-link"
+              >
+                {selectedCategory ? t("viewAll") : t("gift")}{" "}
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </button>
+            )}
           </div>
           <div className="filter-row" aria-label={t("filter")}>
             <button
@@ -123,25 +128,25 @@ export function ProductCollections() {
                 onClick={() => selectCategory(category.id)}
                 aria-pressed={selectedCategory?.id === category.id}
               >
-                {category.subtitle}
+                {t(`kinds.${category.kind}`)}
               </button>
             ))}
           </div>
           <div className="product-grid">
             {visibleProducts.map((product) => (
               <article className="product-card" key={product.id}>
-                <div className={`product-image tone-${product.color}`}>
+                <div
+                  className={`product-image tone-${["blush", "sage", "beige"][categories.findIndex((category) => category.id === product.category) % 3] || "beige"}`}
+                >
                   <ShopPhoto
-                    item={product.image}
-                    alt={product.name}
+                    src={product.image}
+                    alt={product.imageAlt}
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
                   />
                   <span className="product-tag">
-                    {product.id === "bunny"
-                      ? t("favoriteTag")
-                      : product.id === "flowers"
-                        ? t("flowerTag")
-                        : t("handmadeTag")}
+                    {product.availability === "unavailable"
+                      ? t("unavailable")
+                      : t("handmadeTag")}
                   </span>
                   <SaveProduct name={product.name} />
                 </div>
@@ -156,7 +161,18 @@ export function ProductCollections() {
               </article>
             ))}
           </div>
-          <p className="sample-note">{t("sample")}</p>
+          {!visibleProducts.length && (
+            <p className="sample-note" role="status">
+              {t("empty")}
+            </p>
+          )}
+          <p className="sample-note">
+            {t(
+              visibleProducts.some((product) => product.isSample)
+                ? "sample"
+                : "orderNote"
+            )}
+          </p>
         </div>
       </section>
     </>

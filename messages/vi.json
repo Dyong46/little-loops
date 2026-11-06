@@ -45,7 +45,7 @@
     "instagramEyebrow": "MỘT CHÚT CHUYỆN SAU TỪNG MŨI ĐAN",
     "instagramTitle": "Mỗi ngày ở góc nhỏ.",
     "instagramCta": "Ghé tiệm trên Instagram",
-    "instagramNote": "Góc cảm hứng nhỏ từ những sản phẩm minh họa của tiệm.",
+    "instagramNote": "Một góc nhỏ những món đồ thủ công của tiệm.",
     "closingTitle": "Điều dễ thương bắt đầu bằng lời chào.",
     "closingDescription": "Bạn đã tìm được món yêu thích hay có ý tưởng nhỏ? Kể tiệm nghe nhé.",
     "footerLine1": "Những món quà thủ công nhỏ xinh.",
@@ -60,7 +60,7 @@
     "footerNote2": "Cảm ơn bạn đã ghé chơi.",
     "backTop": "Về lại những điều nhỏ xinh",
     "copyright": "Little Loops. Đan bằng cả trái tim.",
-    "preview": "Cửa hàng mẫu · nội dung minh họa",
+    "preview": "Từng mũi len, một chút yêu thương",
     "navCustom": "Dành riêng bạn",
     "logoAlt": "Trang chủ Little Loops",
     "navLabel": "Điều hướng chính",
@@ -81,11 +81,6 @@
     "reviewItem3": "Quà lưu niệm đặt riêng",
     "reviewRating": "Đánh giá năm sao minh họa",
     "followCta": "Theo dõi hành trình nhỏ của tiệm",
-    "galleryAlt1": "Hoa tulip thủ công hồng dịu",
-    "galleryAlt2": "Thỏ len đang đợi một cái ôm",
-    "galleryAlt3": "Túi len màu kem cho những chuyến đi mỗi ngày",
-    "galleryAlt4": "Móc khóa gấu len tí hon",
-    "galleryAlt5": "Hoa len với sắc xuân dịu nhẹ",
     "closingCta": "Nhắn tiệm một lời chào"
   },
   "Navigation": {
@@ -119,60 +114,18 @@
     "filter": "Lọc bộ sưu tập",
     "all": "Tất cả món xinh",
     "sample": "Một chút gợi ý từ tiệm — sản phẩm, hình ảnh và giá chỉ mang tính minh họa. Mỗi món đều được làm theo đơn đặt hàng.",
-    "alt": "{category} đan móc thủ công",
-    "favoriteTag": "Bạn nhỏ được yêu mến",
-    "flowerTag": "Mãi mãi khoe sắc",
     "handmadeTag": "Làm bằng cả yêu thương",
     "quote": "Báo giá theo yêu cầu",
-    "categories": {
-      "plushies": {
-        "name": "Những bạn nhỏ êm ái",
-        "subtitle": "Thú bông len"
-      },
-      "flowers": {
-        "name": "Hoa mãi chẳng phai",
-        "subtitle": "Hoa len"
-      },
-      "bags": {
-        "name": "Xinh xắn mỗi ngày",
-        "subtitle": "Túi len"
-      },
-      "keychains": {
-        "name": "Bạn đồng hành tí hon",
-        "subtitle": "Móc khóa"
-      },
-      "gifts": {
-        "name": "Dành riêng cho bạn",
-        "subtitle": "Quà cá nhân hóa"
-      }
+    "kinds": {
+      "plushies": "Thú bông len",
+      "flowers": "Hoa len",
+      "bags": "Túi len",
+      "keychains": "Móc khóa",
+      "gifts": "Quà cá nhân hóa"
     },
-    "products": {
-      "bunny": {
-        "name": "Thỏ nhỏ Rosie",
-        "description": "Bạn nhỏ mềm mại với đôi tai dài và khăn hồng dịu. Chọn màu bạn thích để Rosie mang nét riêng của bạn.",
-        "note": "Bạn nhỏ được yêu mến"
-      },
-      "flowers": {
-        "name": "Một ôm tulip nhỏ",
-        "description": "Bó tulip len luôn tươi xinh. Bạn có thể chọn sắc hoa yêu thích và số cành mong muốn.",
-        "note": "Để người nhận mỉm cười"
-      },
-      "bag": {
-        "name": "Túi dạo chợ Chủ nhật",
-        "description": "Chiếc túi len thân thiện cho những buổi sáng thảnh thơi và chuyến đi thường ngày. Hỏi tiệm về màu sắc và kích thước nhé.",
-        "note": "Dành cho mỗi ngày của bạn"
-      },
-      "bear": {
-        "name": "Gấu tí hon, thương thật nhiều",
-        "description": "Mang theo chút niềm vui cùng móc khóa gấu len nhỏ xinh. Chọn màu yêu thích để treo lên chìa khóa hay túi nhé.",
-        "note": "Món quà nhỏ đầy ý nghĩa"
-      },
-      "gift": {
-        "name": "Kỷ vật nhỏ của riêng bạn",
-        "description": "Món quà len cá nhân hóa từ ý tưởng của bạn. Nhắn tiệm để trao đổi thiết kế, thời gian hoàn thành và báo giá nhé.",
-        "note": "Chỉ một phiên bản"
-      }
-    }
+    "orderNote": "Nhắn tiệm để xác nhận màu sắc, thời gian làm và đặt món đồ bạn yêu thích.",
+    "empty": "Chưa có sản phẩm trong mục này. Ghé lại tiệm sau nhé!",
+    "unavailable": "Tạm hết hàng"
   },
   "Contact": {
     "defaultLabel": "Cùng làm điều dễ thương nhé",

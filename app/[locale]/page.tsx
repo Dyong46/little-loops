@@ -20,12 +20,15 @@ import {
   Star,
 } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
-import { ContactButton } from "@/components/shop-interactions"
+import {
+  ContactButton,
+  ShopContactProvider,
+} from "@/components/shop-interactions"
 import { ShopMotion } from "@/components/shop-motion"
 import { MobileNavigation } from "@/components/mobile-navigation"
 import { ProductCollections } from "@/components/product-collections"
 import { ShopPhoto } from "@/components/shop-photo"
-import { shop } from "@/lib/shop"
+import { getStorefront } from "@/sanity/lib/storefront"
 
 async function Logo({ footer = false }: { footer?: boolean }) {
   const t = await getTranslations("Home")
@@ -100,12 +103,20 @@ export default async function Page({
     { label: t("navStory"), href: "#story" },
     { label: t("navCustom"), href: "#custom" },
   ]
-  const instagram = shop.channels.find(
+  const { categories, products, channels } = await getStorefront(locale)
+  const customPhoto =
+    products.find((product) =>
+      categories.some(
+        (category) =>
+          category.id === product.category && category.kind === "flowers"
+      )
+    ) ?? products[0]
+  const instagram = channels.find(
     (channel) => channel.name === "Instagram"
   )?.url
 
   return (
-    <>
+    <ShopContactProvider channels={channels}>
       <a href="#main" className="skip-link">
         {t("skip")}
       </a>
@@ -233,7 +244,7 @@ export default async function Page({
             </span>
           </div>
         </div>
-        <ProductCollections />
+        <ProductCollections categories={categories} products={products} />
         <section
           id="story"
           className="story-section container"
@@ -299,8 +310,8 @@ export default async function Page({
                 className="custom-flower"
               />
               <ShopPhoto
-                item="flowers"
-                alt={t("customAlt")}
+                src={customPhoto?.image}
+                alt={customPhoto?.imageAlt ?? t("customAlt")}
                 sizes="(max-width: 767px) 100vw, 60vw"
               />
               <span className="custom-sticker">
@@ -396,31 +407,24 @@ export default async function Page({
               )}
             </div>
             <div className="instagram-grid" data-motion-grid>
-              {["flowers", "bunny", "bag", "bear", "flowers"].map(
-                (item, index) => (
+              {products
+                .filter((product) => product.image)
+                .slice(0, 5)
+                .map((product, index) => (
                   <div
                     className={`gallery-image gallery-${index}`}
-                    key={`${item}-${index}`}
+                    key={product.id}
                   >
                     <ShopPhoto
-                      item={item}
-                      alt={
-                        [
-                          t("galleryAlt1"),
-                          t("galleryAlt2"),
-                          t("galleryAlt3"),
-                          t("galleryAlt4"),
-                          t("galleryAlt5"),
-                        ][index]
-                      }
-                      sizes="(max-width: 640px) 100vw, 40vw"
+                      src={product.image}
+                      alt={product.imageAlt}
+                      sizes="(max-width: 640px) 50vw, 20vw"
                     />
                     <span>
                       <Instagram aria-hidden="true" className="size-5" />
                     </span>
                   </div>
-                )
-              )}
+                ))}
             </div>
             <p className="sample-note">{t("instagramNote")}</p>
           </div>
@@ -454,7 +458,7 @@ export default async function Page({
           </div>
           <div>
             <h2>{t("footerSocial")}</h2>
-            {shop.channels.map((channel) =>
+            {channels.map((channel) =>
               channel.url ? (
                 <a
                   href={channel.url}
@@ -495,6 +499,6 @@ export default async function Page({
         </div>
       </footer>
       <ContactButton floating />
-    </>
+    </ShopContactProvider>
   )
 }

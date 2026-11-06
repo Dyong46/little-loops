@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { createContext, useContext, useState, type ReactNode } from "react"
 import { useTranslations } from "next-intl"
 import {
   ArrowUpRight,
@@ -18,7 +18,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { shop, type Product } from "@/lib/shop"
+import type { ContactChannel, Product } from "@/lib/shop"
+
+const ContactContext = createContext<ContactChannel[]>([])
+
+export function ShopContactProvider({
+  channels,
+  children,
+}: {
+  channels: ContactChannel[]
+  children: ReactNode
+}) {
+  return (
+    <ContactContext.Provider value={channels}>
+      {children}
+    </ContactContext.Provider>
+  )
+}
 
 type ContactProps = {
   label?: string
@@ -29,6 +45,7 @@ type ContactProps = {
 
 function Channels({ subject }: { subject?: string }) {
   const t = useTranslations("Contact")
+  const channels = useContext(ContactContext)
   const [copied, setCopied] = useState(false)
   const message = subject
     ? t("messageSubject", { subject })
@@ -62,7 +79,7 @@ function Channels({ subject }: { subject?: string }) {
           {copied ? t("copyStatus") : ""}
         </span>
       </div>
-      {shop.channels.map((channel, index) => {
+      {channels.map((channel, index) => {
         const Icon =
           index === 2 ? Instagram : index === 0 ? Send : MessageCircle
         return channel.url ? (
@@ -92,7 +109,7 @@ function Channels({ subject }: { subject?: string }) {
           </div>
         )
       })}
-      {!shop.channels.some((channel) => channel.url) && (
+      {!channels.some((channel) => channel.url) && (
         <p className="text-xs leading-relaxed text-muted-foreground">
           {t("preview")}
         </p>
@@ -168,9 +185,11 @@ export function ProductDetails({ product }: { product: Product }) {
         <DialogDescription>{product.description}</DialogDescription>
         <p className="text-lg font-medium text-primary">
           {product.price}{" "}
-          <span className="text-xs font-normal text-muted-foreground">
-            {t("samplePrice")}
-          </span>
+          {product.isSample && (
+            <span className="text-xs font-normal text-muted-foreground">
+              {t("samplePrice")}
+            </span>
+          )}
         </p>
         <p className="text-sm text-muted-foreground">{t("productNote")}</p>
         <Channels subject={product.name} />
