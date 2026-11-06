@@ -9,8 +9,7 @@ import {
   MessageCircle,
   Send,
 } from "lucide-react"
-import { motion, useReducedMotion } from "motion/react"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
@@ -105,25 +104,19 @@ export function ContactButton({
   subject,
   floating = false,
 }: ContactProps) {
-  const reducedMotion = useReducedMotion()
   return (
     <Dialog>
       <DialogTrigger
-        render={
-          <Button
-            className={floating ? "contact-fab" : `shop-button ${className}`}
-          />
-        }
+        className={`${buttonVariants()} ${floating ? "contact-fab" : `shop-button ${className}`}`}
+        type="button"
         aria-label={floating ? "Contact Little Loops" : undefined}
+        data-motion-contact={floating ? "" : undefined}
       >
         {floating ? (
-          <motion.span
-            whileHover={reducedMotion ? undefined : { rotate: -8 }}
-            className="flex items-center gap-2"
-          >
+          <span className="flex items-center gap-2">
             <MessageCircle aria-hidden="true" className="size-5" />
             <span className="hidden sm:inline">Let’s chat</span>
-          </motion.span>
+          </span>
         ) : (
           <>
             {label}

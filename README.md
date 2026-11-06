@@ -8,7 +8,7 @@ A responsive, enquiry-only homepage built on the existing Next.js 16 App Router,
 npm run dev
 ```
 
-The homepage is a Server Component. Category filters use the `category` search parameter and work as ordinary links. Product enquiries and the floating contact dialog use the existing Base UI dialog and button components. The mobile navigation uses a native disclosure. The floating contact control respects reduced motion.
+The homepage is a Server Component. The category and featured-product sections form a small Client Component (`ProductCollections`) with local selected-category state. Filtering updates only this island, without changing the URL or requesting a server navigation. Product enquiries and the floating contact dialog use the existing Base UI dialog and button components. The mobile navigation is an animated disclosure with Escape, outside-click dismissal, and focus restoration. Entrances and interaction feedback respect reduced motion.
 
 ## Shop configuration
 
@@ -46,4 +46,22 @@ The default Turbopack build encountered an environment helper-port permission er
 npm run build -- --webpack
 ```
 
-The local homepage and category routes return HTTP 200. Browser automation was unavailable during verification; responsive layouts, keyboard interaction, focus management, and reduced-motion behavior should receive visual QA before launch.
+The homepage returns HTTP 200 and renders its initial catalog on the server. Browser automation was unavailable during verification; responsive layouts, keyboard interaction, focus management, and reduced-motion behavior should receive visual QA before launch.
+
+## Soft & Playful motion
+
+Motion was added using the local `ui-ux-pro-max` skill's focused animation and accessibility guidance. Layout, typography, colors, copy, and category/contact flows are preserved.
+
+- `components/shop-motion.tsx` progressively enhances existing server markup: 520ms/16px fade-up reveals, 80ms hero staggering, a 650ms/1.015 image reveal, and 70ms staggering within each grid row. Each card has its own viewport observer, so mobile rows wait until visible. Local category changes do not remount the homepage or restart its motion controller. Observers and animations are cleaned up on navigation, preference changes, and unmount.
+- `components/mobile-navigation.tsx` provides a 180ms transform/opacity dropdown. Exiting links are inert; Escape returns focus to the trigger. Link activation and outside clicks dismiss it.
+- `hooks/use-shop-reduced-motion.ts` combines Motion's reduced-motion preference with a live media-query subscription, because the installed Motion hook snapshots the initial preference.
+- `app/globals.css` shares 200ms micro-interaction timing and restrained easing. Fine-pointer hover lifts cards 4px and zooms images 1.025; touch still gets press feedback and all actions work without hover. Keyboard focus indicators remain visible.
+- `app/page.tsx` stays a Server Component and supplies lightweight data attributes to existing elements. `components/shop-interactions.tsx` marks the floating contact trigger for its one-time entrance and removes the old rotating label interaction.
+
+There are no infinite loops, scroll listeners, layout-property animations, hidden server-rendered content, new dependencies, or page-transition routing hooks. Focusing a revealing element immediately finishes its entrance. Full visual mobile and reduced-motion QA remains limited by unavailable browser automation; server output, typecheck, scoped lint, and the Webpack production build are verified.
+
+### Touch controls and calmer browsing
+
+The category and featured-product headings/grids now remain static when scrolling, avoiding a late fade-up after their images are already visible. Other section entrances remain intact. The mobile menu uses a native button; contact actions use the Base UI dialog trigger directly rather than a composed second Button. Menu and floating-chat touch targets use `touch-action: manipulation` and remain stationary on coarse pointers. Floating-chat entrance is limited to fine pointers. The header has an explicit stacking layer above animated content and below dialog overlays. Actual iPhone Safari verification is still pending.
+
+Category tiles and filter controls use local React state and `aria-pressed` buttons. Only category tiles explicitly scroll down to the collection; in-section filters keep the current position. Category changes do not update the URL or fetch another Server Component payload. The obsolete routing-link helper was removed.

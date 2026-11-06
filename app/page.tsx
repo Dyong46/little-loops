@@ -8,20 +8,18 @@ import {
   Heart,
   Camera as Instagram,
   Leaf,
-  Menu,
   Package,
   Scissors,
   Sparkles,
   Star,
 } from "lucide-react"
 import { buttonVariants } from "@/components/ui/button"
-import {
-  ContactButton,
-  ProductDetails,
-  SaveProduct,
-} from "@/components/shop-interactions"
+import { ContactButton } from "@/components/shop-interactions"
+import { ShopMotion } from "@/components/shop-motion"
+import { MobileNavigation } from "@/components/mobile-navigation"
+import { ProductCollections } from "@/components/product-collections"
 import { ShopPhoto } from "@/components/shop-photo"
-import { categories, products, shop } from "@/lib/shop"
+import { shop } from "@/lib/shop"
 
 const nav = [
   { label: "The collection", href: "#collection" },
@@ -47,18 +45,7 @@ function Logo({ footer = false }: { footer?: boolean }) {
   )
 }
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ category?: string }>
-}) {
-  const query = await searchParams
-  const selectedCategory = categories.find(
-    (category) => category.id === query.category
-  )
-  const visibleProducts = selectedCategory
-    ? products.filter((product) => product.category === selectedCategory.id)
-    : products.slice(0, 4)
+export default function Page() {
   const instagram = shop.channels.find(
     (channel) => channel.name === "Instagram"
   )?.url
@@ -86,30 +73,26 @@ export default async function Page({
           <div className="header-contact">
             <ContactButton label="Say hello" className="header-hello" />
           </div>
-          <details className="mobile-nav">
-            <summary aria-label="Open navigation">
-              <Menu aria-hidden="true" />
-            </summary>
-            <nav aria-label="Mobile navigation">
-              {nav.map((item) => (
-                <a key={item.href} href={item.href}>
-                  {item.label}
-                </a>
-              ))}
-              <a href="#contact">
-                Say hello <ArrowUpRight aria-hidden="true" className="size-4" />
+          <MobileNavigation>
+            {nav.map((item) => (
+              <a key={item.href} href={item.href}>
+                {item.label}
               </a>
-            </nav>
-          </details>
+            ))}
+            <a href="#contact">
+              Say hello <ArrowUpRight aria-hidden="true" className="size-4" />
+            </a>
+          </MobileNavigation>
         </div>
       </header>
       <main id="main">
+        <ShopMotion />
         <section className="hero container" aria-labelledby="hero-title">
           <div className="hero-copy">
             <span className="eyebrow">
               <span className="tiny-line" /> A LITTLE YARN. A LOT OF LOVE.
             </span>
-            <h1 id="hero-title">
+            <h1 id="hero-title" data-motion-hero>
               Little things,
               <br />
               made with{" "}
@@ -120,13 +103,13 @@ export default async function Page({
                 </svg>
               </span>
             </h1>
-            <p>
+            <p data-motion-hero>
               Soft stitches, sweet details, and a little bit of magic.
               <br className="hidden lg:block" /> Handmade crochet treasures to
               keep close
               <br className="hidden lg:block" /> or gift to someone special.
             </p>
-            <div className="hero-actions">
+            <div className="hero-actions" data-motion-hero>
               <a
                 href="#collection"
                 className={`${buttonVariants()} shop-button`}
@@ -197,127 +180,13 @@ export default async function Page({
             </span>
           </div>
         </div>
-        <section
-          className="category-section container"
-          aria-labelledby="category-title"
-        >
-          <div className="center-heading">
-            <span className="eyebrow">FIND YOUR LITTLE JOY</span>
-            <h2 id="category-title">A lovely little world of crochet.</h2>
-            <p>For the cuddles, the everyday, and the just-because moments.</p>
-          </div>
-          <div className="category-grid">
-            {categories.map((category, index) => (
-              <Link
-                key={category.id}
-                href={`/?category=${category.id}#collection`}
-                className="category-item"
-              >
-                <div className={`category-image category-${index}`}>
-                  <ShopPhoto
-                    item={category.image}
-                    alt={`Handmade crochet ${category.subtitle.toLowerCase()}`}
-                    sizes="(max-width: 640px) 60vw, 30vw"
-                  />
-                </div>
-                <h3>{category.name}</h3>
-                <span>
-                  {category.subtitle}{" "}
-                  <ArrowUpRight className="size-3" aria-hidden="true" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </section>
-        <section
-          id="collection"
-          className="collection-section"
-          aria-labelledby="collection-title"
-        >
-          <div className="container">
-            <div className="section-heading">
-              <div>
-                <span className="eyebrow">FROM OUR HANDS TO YOUR HEART</span>
-                <h2 id="collection-title">
-                  {selectedCategory
-                    ? selectedCategory.name
-                    : "Meet your new favorites."}
-                </h2>
-              </div>
-              <Link
-                href={
-                  selectedCategory
-                    ? "/#collection"
-                    : "/?category=gifts#collection"
-                }
-                className="text-link"
-              >
-                {selectedCategory
-                  ? "View all favorites"
-                  : "Find a personal gift"}{" "}
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </div>
-            <div className="filter-row" aria-label="Filter collection">
-              <Link
-                href="/#collection"
-                aria-current={!selectedCategory ? "true" : undefined}
-              >
-                All the lovely things
-              </Link>
-              {categories.map((category) => (
-                <Link
-                  key={category.id}
-                  href={`/?category=${category.id}#collection`}
-                  aria-current={
-                    selectedCategory?.id === category.id ? "true" : undefined
-                  }
-                >
-                  {category.subtitle}
-                </Link>
-              ))}
-            </div>
-            <div className="product-grid">
-              {visibleProducts.map((product) => (
-                <article className="product-card" key={product.id}>
-                  <div className={`product-image tone-${product.color}`}>
-                    <ShopPhoto
-                      item={product.image}
-                      alt={product.name}
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 50vw"
-                    />
-                    <span className="product-tag">
-                      {product.id === "bunny"
-                        ? "Much-loved little one"
-                        : product.id === "flowers"
-                          ? "Forever in bloom"
-                          : "Handmade with love"}
-                    </span>
-                    <SaveProduct name={product.name} />
-                  </div>
-                  <div className="product-info">
-                    <div>
-                      <p className="product-note">{product.note}</p>
-                      <h3>{product.name}</h3>
-                      <p className="product-price">{product.price}</p>
-                    </div>
-                    <ProductDetails product={product} />
-                  </div>
-                </article>
-              ))}
-            </div>
-            <p className="sample-note">
-              A peek at what’s possible — illustrative products, imagery, and
-              prices. Each piece is made to order.
-            </p>
-          </div>
-        </section>
+        <ProductCollections />
         <section
           id="story"
           className="story-section container"
           aria-labelledby="story-title"
         >
-          <div className="story-visual">
+          <div className="story-visual" data-motion-reveal>
             <div className="story-photo">
               <Image
                 src="/images/crochet-hero.png"
@@ -332,7 +201,7 @@ export default async function Page({
               <span>A slower kind of lovely.</span>
             </div>
           </div>
-          <div className="story-copy">
+          <div className="story-copy" data-motion-reveal>
             <span className="eyebrow">HELLO FROM OUR LITTLE CORNER</span>
             <h2>
               A little yarn.
@@ -365,7 +234,7 @@ export default async function Page({
           className="custom-section container"
           aria-labelledby="custom-title"
         >
-          <div className="custom-card">
+          <div className="custom-card" data-motion-reveal>
             <div className="custom-copy">
               <span className="eyebrow">
                 YOUR IDEA. OUR HAPPY LITTLE HANDS.
@@ -409,7 +278,7 @@ export default async function Page({
           className="testimonial-section container"
           aria-labelledby="testimonial-title"
         >
-          <div className="center-heading">
+          <div className="center-heading" data-motion-reveal>
             <span className="eyebrow">LITTLE NOTES, WARM HEARTS</span>
             <h2 id="testimonial-title">The sweetest part? Your smiles.</h2>
             <p className="sample-note">
@@ -417,7 +286,7 @@ export default async function Page({
               soon.
             </p>
           </div>
-          <div className="testimonial-grid">
+          <div className="testimonial-grid" data-motion-grid>
             {[
               {
                 quote:
@@ -472,7 +341,7 @@ export default async function Page({
           aria-labelledby="instagram-title"
         >
           <div className="container">
-            <div className="section-heading">
+            <div className="section-heading" data-motion-reveal>
               <div>
                 <span className="eyebrow">A PEEK BEHIND THE STITCHES</span>
                 <h2 id="instagram-title">Our little everyday.</h2>
@@ -495,7 +364,7 @@ export default async function Page({
                 />
               )}
             </div>
-            <div className="instagram-grid">
+            <div className="instagram-grid" data-motion-grid>
               {["flowers", "bunny", "bag", "bear", "flowers"].map(
                 (item, index) => (
                   <div
@@ -527,7 +396,11 @@ export default async function Page({
             </p>
           </div>
         </section>
-        <section id="contact" className="closing-section container">
+        <section
+          id="contact"
+          className="closing-section container"
+          data-motion-reveal
+        >
           <Flower2 aria-hidden="true" strokeWidth={1} />
           <h2>Something lovely starts with hello.</h2>
           <p>Found a favorite? Have a little idea? We’d love to hear it.</p>
